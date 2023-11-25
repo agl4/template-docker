@@ -31,3 +31,5 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
           cache: true
           cache-repository: ghcr.io/${{ github.repository }}/cache
+          build-args: |
+            FROM_TAG=${{ matrix.FROM_TAG }}
