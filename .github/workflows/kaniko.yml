@@ -34,15 +34,15 @@ jobs:
 
       - run: |
           if [ "$GITHUB_REF_NAME" == "main" ] ; then
-            echo ""
+            echo "tag=''" >> "$GITHUB_OUTPUT"
           else
-            echo "$GITHUB_REF_NAME"
+            echo "tag=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
           fi
         id: setup_tag
 
       - run: echo $TAG
         env:
-          TAG: ${{ steps.setup_tag.outputs }}
+          TAG: ${{ steps.setup_tag.outputs.tag }}
 
       # - uses: int128/kaniko-action@v1
       #   with:
