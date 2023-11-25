@@ -14,7 +14,7 @@ jobs:
     #       - FROM_TAG: "23.04"
     #       - FROM_TAG: ""
     env:
-      FROM_TAG: ${{ (env.GITHUB_REF_NAME == 'main') && '' }}
+      FROM_TAG: ${{ env.GITHUB_REF_NAME == 'main' && '' || env.GITHUB_REF_NAME }}
     steps:
       - uses: actions/checkout@v3
       - uses: docker/metadata-action@v3
