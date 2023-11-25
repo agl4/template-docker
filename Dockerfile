@@ -1,2 +1,1 @@
-ARG FROM_TAG=22.04
-FROM ubuntu:${FROM_TAG}
+FROM ubuntu:22.04
