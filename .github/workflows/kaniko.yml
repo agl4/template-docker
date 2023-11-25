@@ -25,7 +25,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo $FROM_TAG
+      - run: echo $GITHUB_REF_NAME
         env:
           FROM_TAG: ${{ env.GITHUB_REF_NAME == 'main' && '' || env.GITHUB_REF_NAME }}
 
