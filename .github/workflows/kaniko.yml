@@ -32,6 +32,18 @@ jobs:
           MY_ENV_VAR2: ${{ github.ref == 'refs/heads/main' && '' || 'value_for_other_branches' }}
           MY_ENV_VAR3: ${{ github.ref == 'refs/heads/main' && '' || github.env.GITHUB_REF_NAME }}
 
+      - run: |
+          if [ "$GITHUB_REF_NAME" == "main" ] ; then
+            echo ""
+          else
+            echo "$GITHUB_REF_NAME"
+          fi
+        id: setup_tag
+
+      - run: echo $TAG
+        env:
+          TAG: ${{ steps.setup_tag.outputs }}
+
       # - uses: int128/kaniko-action@v1
       #   with:
       #     push: true
