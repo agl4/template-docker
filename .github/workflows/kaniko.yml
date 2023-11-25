@@ -7,12 +7,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - FROM_TAG: "23.04"
-          - FROM_TAG: ""
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     include:
+    #       - FROM_TAG: "23.04"
+    #       - FROM_TAG: ""
+    env:
+      FROM_TAG: ${{ (GITHUB_REF_NAME == 'main') && '' || GITHUB_REF_NAME }}
     steps:
       - uses: actions/checkout@v3
       - uses: docker/metadata-action@v3
@@ -27,10 +29,9 @@ jobs:
       - uses: int128/kaniko-action@v1
         with:
           push: true
-          # tags: ${{ steps.metadata.outputs.tags }}
-          tags: ${{ matrix.FROM_TAG }}
+          tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           cache: true
           cache-repository: ghcr.io/${{ github.repository }}/cache
           build-args: |
-            FROM_TAG=${{ matrix.FROM_TAG }}
+            FROM_TAG=${{ env.FROM_TAG }}
