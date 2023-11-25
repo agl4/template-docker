@@ -30,7 +30,7 @@ jobs:
           FROM_TAG: ${{ env.GITHUB_REF_NAME == 'main' && '' || env.GITHUB_REF_NAME }}
           MY_ENV_VAR: ${{ github.ref == 'refs/heads/main' && 'value_for_main_branch' || 'value_for_other_branches' }}
           MY_ENV_VAR2: ${{ github.ref == 'refs/heads/main' && '' || 'value_for_other_branches' }}
-          MY_ENV_VAR3: ${{ github.ref == 'refs/heads/main' && '' || env.GITHUB_REF_NAME }}
+          MY_ENV_VAR3: ${{ github.ref == 'refs/heads/main' && '' || github.env.GITHUB_REF_NAME }}
 
       - uses: int128/kaniko-action@v1
         with:
