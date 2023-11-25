@@ -27,7 +27,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - run: echo tag=${FROM_TAG} ref=$GITHUB_REF_NAME env=$MY_ENV_VAR env2=$MY_ENV_VAR2 env3=$MY_ENV_VAR3
         env:
-          FROM_TAG: ${{ env.GITHUB_REF_NAME != 'main' && github.env.GITHUB_REF_NAME || '2' }}
+          FROM_TAG: ${{ env.GITHUB_REF_NAME != '23.04' && github.env.GITHUB_REF_NAME || '2' }}
           MY_ENV_VAR: ${{ github.ref == 'refs/heads/main' && 'value_for_main_branch' || 'value_for_other_branches' }}
           MY_ENV_VAR2: ${{ github.ref == 'refs/heads/main' && '' || 'value_for_other_branches' }}
           MY_ENV_VAR3: ${{ github.ref == 'refs/heads/main' && '' || github.env.GITHUB_REF_NAME }}
