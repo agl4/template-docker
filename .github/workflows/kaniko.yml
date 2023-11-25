@@ -25,9 +25,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: echo tag=${FROM_TAG} ref=$GITHUB_REF_NAME
+      - run: echo tag=${FROM_TAG} ref=$GITHUB_REF_NAME env=$MY_ENV_VAR
         env:
           FROM_TAG: ${{ env.GITHUB_REF_NAME == 'main' && '' || env.GITHUB_REF_NAME }}
+          MY_ENV_VAR: ${{ github.ref == 'refs/heads/main' && 'value_for_main_branch' || 'value_for_other_branches' }}
 
       - uses: int128/kaniko-action@v1
         with:
