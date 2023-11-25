@@ -25,6 +25,10 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo $FROM_TAG
+        env:
+          FROM_TAG: ${{ env.GITHUB_REF_NAME == 'main' && '' || env.GITHUB_REF_NAME }}
+
       - uses: int128/kaniko-action@v1
         with:
           push: true
