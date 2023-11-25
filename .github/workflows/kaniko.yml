@@ -1,5 +1,6 @@
 ---
 # https://github.com/marketplace/actions/kaniko-action
+
 name: Build docker images
 on:
   push: {}
@@ -33,3 +34,4 @@ jobs:
           cache-repository: ghcr.io/${{ github.repository }}/cache
           build-args: |
             FROM_TAG=${{ env.GITHUB_REF_NAME == 'main' && '' || env.GITHUB_REF_NAME }}
+
